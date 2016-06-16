@@ -13,6 +13,9 @@ use Psr\Log\LoggerInterface;
 
 class Component extends AbstractLogger
 {
+    /**
+     * @var array $loggers
+     */
     private $loggers;
 
     /**

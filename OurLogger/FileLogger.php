@@ -15,8 +15,17 @@ use Psr\Log\InvalidArgumentException;
 
 class FileLogger extends AbstractLogger
 {
+    /**
+     * @var string $filename
+     */
     private $filename;
+    /**
+     * @var array $levels
+     */
     private $levels;
+    /**
+     * @var array $acceptedLevels
+     */
     private $acceptedLevels = [
         LogLevel::EMERGENCY,
         LogLevel::ALERT,

@@ -15,8 +15,13 @@ use Psr\Log\InvalidArgumentException;
 
 class SyslogLogger extends AbstractLogger
 {
-
+    /**
+     * @var array $levels
+     */
     private $levels;
+    /**
+     * @var array $acceptedLevels
+     */
     private $acceptedLevels = [
         LogLevel::EMERGENCY,
         LogLevel::ALERT,
@@ -26,6 +31,19 @@ class SyslogLogger extends AbstractLogger
         LogLevel::NOTICE,
         LogLevel::INFO,
         LogLevel::DEBUG
+    ];
+    /**
+     * @var array $syslogLevels
+     */
+    private $syslogLevels = [
+        'emergency' => 'LOG_EMERG',
+        'alert' => 'LOG_ALERT',
+        'critical' => 'LOG_CRIT',
+        'error' => 'LOG_ERR',
+        'warning' => 'LOG_WARNING',
+        'notice' => 'LOG_NOTICE',
+        'info' => 'LOG_INFO',
+        'debug' => 'LOG_DEBUG'
     ];
 
     /**
@@ -66,9 +84,11 @@ class SyslogLogger extends AbstractLogger
         if (!in_array($level, $this->acceptedLevels)) {
             throw new InvalidArgumentException('Incorrect log level');
         }
+        openlog("OurLogger", LOG_PID, LOG_LOCAL0);
         if (in_array($level, $this->levels)) {
-            syslog($level, (string)$message);
+            syslog($this->syslogLevels[$level], (string)$message);
         }
+        closelog();
     }
 
 }
