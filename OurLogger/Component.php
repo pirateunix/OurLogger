@@ -38,7 +38,7 @@ class Component extends AbstractLogger
      */
     public function log($level, $message, array $context = array())
     {
-        $msg = date('Y-m-d H:i:s') . ' ' . strtoupper($level) . 'LVL ' . $message . "\n";
+        $msg = date('c') . ' ' . strtoupper($level) . 'LVL ' . $message . "\n";
         foreach ($this->loggers as $logger) {
             $logger->log($level, $msg);
         }
