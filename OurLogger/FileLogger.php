@@ -37,12 +37,9 @@ class FileLogger extends AbstractLogger
     {
         $this->filename = $params['filename'];
 
-        if (array_key_exists('levels', $params)) {
-
+        if (!empty($params['levels'])) {
             $levels = array_intersect($params['levels'], $this->acceptedLevels);
-
             $this->levels = $levels;
-
         } else {
             $this->levels = $this->acceptedLevels;
         }
@@ -59,11 +56,18 @@ class FileLogger extends AbstractLogger
      */
     public function log($level, $message, array $context = array())
     {
+        /**
+         * Согласно описанию Psr3 InvalidArgumentException возникает, когда передается LogLevel,
+         * который неподдерживается данной реализацией. В таком случае необходимость в свойстве $this->levels отпадает,
+         * и в коснтрукторе можно переисывать $this->acceptedLevels.
+         * Но в таком случае заданный файл index.php будет вызывать данное исключение всегда.
+         * Поэтому было принято решение вызывать исключение, когда LogLevel не соответствует перечисленным в Psr3.
+         *
+         */
         if (!in_array($level, $this->acceptedLevels)) {
             throw new InvalidArgumentException('Incorrect log level');
         }
         if (in_array($level, $this->levels)) {
-
             file_put_contents($this->filename, (string)$message, FILE_APPEND);
         }
 
