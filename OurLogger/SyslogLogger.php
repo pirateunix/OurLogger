@@ -36,14 +36,14 @@ class SyslogLogger extends AbstractLogger
      * @var array $syslogLevels
      */
     private $syslogLevels = [
-        'emergency' => 'LOG_EMERG',
-        'alert' => 'LOG_ALERT',
-        'critical' => 'LOG_CRIT',
-        'error' => 'LOG_ERR',
-        'warning' => 'LOG_WARNING',
-        'notice' => 'LOG_NOTICE',
-        'info' => 'LOG_INFO',
-        'debug' => 'LOG_DEBUG'
+        'emergency' => LOG_EMERG,
+        'alert' => LOG_ALERT,
+        'critical' => LOG_CRIT,
+        'error' => LOG_ERR,
+        'warning' => LOG_WARNING,
+        'notice' => LOG_NOTICE,
+        'info' => LOG_INFO,
+        'debug' => LOG_DEBUG
     ];
 
     /**
