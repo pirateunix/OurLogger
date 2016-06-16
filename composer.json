@@ -1,0 +1,19 @@
+{
+    "name": "anketolog/psrLogger",
+    "version":"1.0.0",
+    "require": {
+        "php":">=5.3.0",
+        "psr/log":"dev-master"
+    },
+    "repositories":[
+        {
+            "type":"git",
+            "url":"https://github.com/php-fig/log.git"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+            "OurLogger\\": "OurLogger/"
+        }
+    }
+ }
